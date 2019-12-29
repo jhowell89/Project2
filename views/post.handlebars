@@ -1,0 +1,51 @@
+<div class="container hidden">
+    <div class="row top-30">
+        <div class="col-md-2 col-sm-2">
+            <a class="btn btn-light" href="/feed">Go to Feed</a>
+        </div>
+        <div class="col-md-2 col-sm-2">
+            <a class="btn btn-light" href="/">Add Member</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form id="cms">
+                <div class="form-group">
+                    <label for="title">Beer!</label>
+                    <input placeholder="Beer You're Reviewing!" type="text" class="form-control" id="title">
+                    <br />
+                    <div class="form-group">
+                        {{!-- <label for="exampleFormControlSelect2">Example multiple select</label>
+                        <select multiple class="form-control" id="category">
+                            <option>IPA</option>
+                            <option>Pale Ale</option>
+                            <option>Blonde</option>
+                            <option>Stout</option>
+                            <option>Port</option>
+                            <option>Sour</option>
+                            <option>Other (Specify in your review!)</option>
+                        </select> --}}
+                        <label for="title">Category</label>
+                        <input placeholder="Ex. IPA, Stout, Pale Ale" type="text" class="form-control" id="category">
+                        <br />
+                    </div>
+                    <label for="body">Review:</label>
+                    <textarea placeholder="Post Body" class="form-control" rows="10" id="body"></textarea>
+                    <div class="form-group">
+                        {{!-- <label for="category">Select Member:</label>
+                        <select class="custom-select" id="author">
+                        </select> --}}
+                        <label for="title">Member Name</label>
+                        <input placeholder="Your Name Here" type="text" class="form-control" id="author">
+                        <br />
+                    </div>
+                    <br />
+                    <button type="submit" class="btn btn-success submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Custom Script -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/post.js"></script>

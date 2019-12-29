@@ -1,0 +1,21 @@
+{
+  "development": {
+    "username": "root",
+    "password": "Mylife89!",
+    "database": "sequelize_beers",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "Mylife89!",
+    "database": "testdb",
+    "host": "localhost",
+    "dialect": "mysql",
+    "logging": false
+  },
+  "production": {
+    "use_env_variable": "JAWSDB_URL",
+    "dialect": "mysql"
+  }
+}
