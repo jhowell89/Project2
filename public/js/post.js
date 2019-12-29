@@ -40,9 +40,9 @@ $(document).ready(function() {
         title: titleInput
           .val()
           .trim(),
-        // category: beerCategory
-        //   .val()
-        //   .trim(),
+        category: beerCategory
+          .val()
+          .trim(),
         body: bodyInput
           .val()
           .trim(),

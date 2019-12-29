@@ -1,99 +1,84 @@
-// Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
-var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
+$(document).ready(function() {
 
-// The API object contains methods for each kind of request we'll make
-var API = {
-  saveExample: function(example) {
-    return $.ajax({
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      url: "api/members",
-      data: JSON.stringify(example)
-    });
-  },
-  getExamples: function() {
-    return $.ajax({
-      url: "api/members",
-      type: "GET"
-    });
-  },
-  deleteExample: function(id) {
-    return $.ajax({
-      url: "api/members/" + id,
-      type: "DELETE"
-    });
-  }
-};
+    var nameInput = $("#member-name");
+    var membersList = $("tbody");
+    var memberContainer = $(".member-container");
+    $(document).on("submit", "#member-form", handleMemberFormSubmit);
+    $(document).on("click", ".delete-member", handleDeleteButtonPress);
 
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
-      var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/members/" + example.id);
+    getMembers();
 
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": example.id
-        })
-        .append($a);
+    function handleMemberFormSubmit(event) {
+      event.preventDefault();
+      if (!nameInput.val().trim().trim()) {
+        return;
+      }
 
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
+      upsertMember({
+        name: nameInput
+          .val()
+          .trim()
+      });
+    }
 
-      $li.append($button);
+    function upsertMember(memberData) {
+      $.post("/api/members", memberData)
+        .then(getMembers);
+    }
 
-      return $li;
-    });
+    function createMemberRow(memberData) {
+      var newTr = $("<tr>");
+      newTr.data("member", memberData);
+      newTr.append("<td>" + memberData.name + "</td>");
+      if (memberData.Posts) {
+        newTr.append("<td> " + memberData.Posts.length + "</td>");
+      } else {
+        newTr.append("<td>0</td>");
+      }
+      newTr.append("<td><a href='/feed?member_id=" + memberData.id + "'>Go to Posts</a></td>");
+      newTr.append("<td><a href='/post?member_id=" + memberData.id + "'>Create a Post</a></td>");
+      newTr.append("<td><a style='cursor:pointer;color:red' class='delete-member'>Delete Member</a></td>");
+      return newTr;
+    }
 
-    $exampleList.empty();
-    $exampleList.append($examples);
+    function getMembers() {
+      $.get("/api/members", function(data) {
+        var rowsToAdd = [];
+        for (var i = 0; i < data.length; i++) {
+          rowsToAdd.push(createMemberRow(data[i]));
+        }
+        renderMemberList(rowsToAdd);
+        nameInput.val("");
+      });
+    }
+
+    function renderMemberList(rows) {
+      memberList.children().not(":last").remove();
+      memberContainer.children(".alert").remove();
+      if (rows.length) {
+        console.log(rows);
+        memberList.prepend(rows);
+      }
+      else {
+        renderEmpty();
+      }
+    }
+
+    function renderEmpty() {
+      var alertDiv = $("<div>");
+      alertDiv.addClass("alert alert-danger");
+      alertDiv.text("You must create an Member before you can create a Post.");
+      memberContainer.append(alertDiv);
+    }
+
+
+    function handleDeleteButtonPress() {
+      var listItemData = $(this).parent("td").parent("tr").data("member");
+      var id = listItemData.id;
+      $.ajax({
+        method: "DELETE",
+        url: "/api/members/" + id
+      })
+        .then(getMembers);
+    }
   });
-};
-
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
-var handleFormSubmit = function(event) {
-  event.preventDefault();
-
-  var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
-  };
-
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
-    return;
-  }
-
-  API.saveExample(example).then(function() {
-    refreshExamples();
-  });
-
-  $exampleText.val("");
-  $exampleDescription.val("");
-};
-
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function() {
-  var idToDelete = $(this)
-    .parent()
-    .attr("data-id");
-
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
-  });
-};
-
-// Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
