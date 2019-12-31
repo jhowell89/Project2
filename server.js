@@ -26,6 +26,7 @@ require("./routes/memberRoutes")(app);
 require("./routes/htmlRoutes")(app);
 require("./routes/postRoutes")(app);
 
+
 var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true

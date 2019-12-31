@@ -17,6 +17,7 @@ $(document).ready(function() {
   var memberId;
   if (url.indexOf("?member_id=") !== -1) {
     memberId = url.split("=")[1];
+    console.log(memberId)
     getPosts(memberId);
   }
   // If there's no authorId we just get all posts as usual
@@ -26,9 +27,9 @@ $(document).ready(function() {
 
   // This function grabs posts from the database and updates the view
   function getPosts(member) {
-    memberId = author || "";
-    if (authorId) {
-      authorId = "/?member_id=" + authorId;
+    memberId = member || "";
+    if (memberId) {
+      memberId = "/?member_id=" + memberId;
     }
     $.get("/api/posts" + memberId, function(data) {
       console.log("Posts", data);
@@ -53,7 +54,7 @@ $(document).ready(function() {
 
   // InitializeRows handles appending all of our constructed post HTML inside blogContainer
   function initializeRows() {
-    blogContainer.empty();
+    feedContainer.empty();
     var postsToAdd = [];
     for (var i = 0; i < posts.length; i++) {
       postsToAdd.push(createNewRow(posts[i]));
@@ -78,7 +79,7 @@ $(document).ready(function() {
     var newPostTitle = $("<h2>");
     var newPostDate = $("<small>");
     var newPostAuthor = $("<h5>");
-    newPostAuthor.text("Written by: " + post.Author.name);
+    newPostAuthor.text("Written by: " + post.Member.name);
     newPostAuthor.css({
       float: "right",
       color: "blue",

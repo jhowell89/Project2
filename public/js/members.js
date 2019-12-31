@@ -19,7 +19,7 @@ $(document).ready(function() {
           .val()
           .trim()
       });
-      
+      window.location.href = "/post";
     }
 
     function upsertMember(memberData) {

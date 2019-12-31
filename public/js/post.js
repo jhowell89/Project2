@@ -26,7 +26,7 @@ $(document).ready(function() {
     // }
   
     // Getting the authors, and their posts
-    // getAuthors();
+    getAuthors();
   
     // A function for handling what happens when the form to create a new post is submitted
     function handleFormSubmit(event) {
@@ -48,9 +48,8 @@ $(document).ready(function() {
           .trim(),
         MemberId: authorSelect.val()
       };
-      alert("test")
       console.log("test)")
-  
+      submitPost(newPost);
       // If we're updating a post run updatePost to update a post
       // Otherwise run submitPost to create a whole new post
       // if (updating) {
@@ -58,7 +57,7 @@ $(document).ready(function() {
       //   updatePost(newPost);
       // }
       // else {
-        submitPost(newPost);
+     
       // }
     }
   
@@ -103,9 +102,9 @@ $(document).ready(function() {
     // // Function to either render a list of authors, or if there are none, direct the user to the page
     // // to create an author first
     function renderAuthorList(data) {
-      if (!data.length) {
-        window.location.href = "/members";
-      }
+      // if (!data.length) {
+      //   window.location.href = "/members";
+      // }
       $(".hidden").removeClass("hidden");
       var rowsToAdd = [];
       for (var i = 0; i < data.length; i++) {

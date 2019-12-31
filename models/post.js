@@ -6,23 +6,16 @@ module.exports = function(sequelize, DataTypes) {
         validate: {
           len: [1]
         }
-      },
-    //  category: {
-    //     type: DataTypes.TEXT,
-    //     allowNull: false,
-    //     len: [1]
-    //   },  
+      }, 
       body: {
         type: DataTypes.TEXT,
         allowNull: false,
         len: [1]
+      },
+      category: {
+        type: DataTypes.STRING,
+        allowNull: false,
       }
-    ,
-    body: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      len: [1]
-    }
   });
 
   Post.associate = function(models) {
