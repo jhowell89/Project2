@@ -8,10 +8,17 @@ p {
   color: Gray
 }
 #members {
-  background-color: lightgrey;
+  background-color:rgb(136,136,136,0.7);
+  padding: 10px;
+  margin: 15px;
 }
 label {
   color: white;
   font-weight: bold;
 
+}
+#cms {
+  background-color:	rgb(136,136,136,0.7);
+  padding: 10px;
+  margin: 15px;
 }
