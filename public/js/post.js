@@ -4,6 +4,7 @@ $(document).ready(function() {
     var titleInput = $("#title");
     var cmsForm = $("#cms");
     var beerCategory = $("#category")
+    var beerRating = $("#rating")
     var authorSelect = $("#author");
     // Adding an event listener for when the form is submitted
     $(cmsForm).on("submit", handleFormSubmit); 
@@ -40,12 +41,11 @@ $(document).ready(function() {
         title: titleInput
           .val()
           .trim(),
-        category: beerCategory
-          .val()
-          .trim(),
+        category: beerCategory.val(),
         body: bodyInput
           .val()
           .trim(),
+        rating: beerRating.val(),
         MemberId: authorSelect.val()
       };
       console.log("test)")
@@ -65,7 +65,7 @@ $(document).ready(function() {
     function submitPost(post) {
       $.post("/api/posts", post, function() {
         console.log(post);
-        // window.location.href = "/feed";
+        window.location.href = "/feed";
       });
     }
   

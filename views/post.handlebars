@@ -1,12 +1,18 @@
 <div class="container hidden">
-    <div class="row top-30">
-        <div class="col-md-2 col-sm-2">
-            <a class="btn btn-light" href="/feed">Go to Feed</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">For the Beer!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/feed">Go to Reviews</a>
+                <a class="nav-item nav-link" href="/post">Write a Review</a>
+            </div>
         </div>
-        <div class="col-md-2 col-sm-2">
-            <a class="btn btn-light" href="/">Add Member</a>
-        </div>
-    </div>
+    </nav>
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <form id="cms">
@@ -15,8 +21,8 @@
                     <input placeholder="Beer You're Reviewing!" type="text" class="form-control" id="title">
                     <br />
                     <div class="form-group">
-                        {{!-- <label for="exampleFormControlSelect2">Example multiple select</label>
-                        <select multiple class="form-control" id="category">
+                        <label for="category">Type of Beer</label>
+                        <select class="form-control" id="category">
                             <option>IPA</option>
                             <option>Pale Ale</option>
                             <option>Blonde</option>
@@ -24,23 +30,32 @@
                             <option>Port</option>
                             <option>Sour</option>
                             <option>Other (Specify in your review!)</option>
-                        </select> --}}
-                        <label for="title">Category</label>
-                        <input placeholder="Ex. IPA, Stout, Pale Ale" type="text" class="form-control" id="category">
-                        <br />
+                        </select>
+                     
                     </div>
                     <label for="body">Review:</label>
                     <textarea placeholder="Post Body" class="form-control" rows="10" id="body"></textarea>
+                    <br>
+                         <div class="form-group">
+                        <label for="category">Overall Rating:</label>
+                        <select class="form-control" id="rating">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                        <br>
                     <div class="form-group">
                         <label for="category">Select Member:</label>
                         <select class="custom-select" id="author">
                         </select>
-                        {{!-- <label for="title">Member Name</label>
-                        <input placeholder="Your Name Here" type="text" class="form-control" id="author">
-                        <br /> --}}
+
                     </div>
                     <br />
-                    <button type="submit" class="btn btn-success submit">Submit</button>
+                    <div class="row">
+                    <button type="submit" class="btn btn-success submit col-md-6 offset-md-3 btn-light">Submit</button>
+                    </div>
                 </div>
             </form>
         </div>

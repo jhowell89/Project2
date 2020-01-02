@@ -1,25 +1,39 @@
- <div class="container hidden">
-        <div class="row top-30">
-      <div class="col-md-2 col-sm-2">
-        <a class="btn btn-outline-secondary" href="/feed">Go to Feed</a>
-      </div>
-      <div class="col-md-2 col-sm-2">
-        <a class="btn btn-outline-secondary" href="/">Manage Members</a>
-      </div>
+<div class="container hidden">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">For the Beer</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/feed">Go to Reviews</a>
+      <a class="nav-item nav-link" href="/post">Write a Review</a>
     </div>
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <form id="members">
-                    <div class="form-group">
-                        <label for="title">Name:</label>
-                        <input placeholder="What is your name?" type="text" class="form-control" id="member_name">
-                        <br />
-                        <br />
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-            </div>
+  </div>
+</nav>
+  <div class="row">
+    <div class="jumbotron col-md-6 offset-md-3">
+      <h1 class="display-4 text-center">I'm Just Here For the Beer</h1>
+      <p class="lead text-center">Sign in to review your favorite (or least favorite) beers!</p>
+      <hr class="my-4">
+      
+      {{!-- <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> --}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <form id="members">
+        <div class="form-group">
+          <label for="title">Name:</label>
+          <input placeholder="What is your name?" type="text" class="form-control" id="member_name">
+          <br />
+          <br />
+          <button type="submit" class="btn btn-primary">Submit</button>
         </div>
+      </form>
     </div>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/js/members.js"></script>
+  </div>
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/members.js"></script>

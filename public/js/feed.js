@@ -82,20 +82,26 @@ $(document).ready(function() {
     newPostAuthor.text("Written by: " + post.Member.name);
     newPostAuthor.css({
       float: "right",
-      color: "blue",
+      color: "dark gray",
       "margin-top": "-10px"
     });
     var newPostCardBody = $("<div>");
     newPostCardBody.addClass("card-body");
     var newPostBody = $("<p>");
+    var newPostCategory = $("<h5>");
+    var newPostRating = $("<h5>")
     newPostTitle.text(post.title + " ");
     newPostBody.text(post.body);
+    newPostCategory.text("Category: " + post.category);
+    newPostRating.text("Rating: " + post.rating + "/5");
     newPostDate.text(formattedDate);
     newPostTitle.append(newPostDate);
     newPostCardHeading.append(deleteBtn);
     newPostCardHeading.append(editBtn);
     newPostCardHeading.append(newPostTitle);
     newPostCardHeading.append(newPostAuthor);
+    newPostCardHeading.append(newPostCategory);
+    newPostCardHeading.append(newPostRating);
     newPostCardBody.append(newPostBody);
     newPostCard.append(newPostCardHeading);
     newPostCard.append(newPostCardBody);
@@ -118,7 +124,7 @@ $(document).ready(function() {
       .parent()
       .parent()
       .data("post");
-    window.location.href = "/cms?post_id=" + currentPost.id;
+    window.location.href = "/post?post_id=" + currentPost.id;
   }
 
   // This function displays a message when there are no posts
@@ -134,7 +140,7 @@ $(document).ready(function() {
     messageH2.html(
       "No posts yet" +
         partial +
-        ", navigate <a href='/cms" +
+        ", navigate <a href='/post" +
         query +
         "'>here</a> in order to get started."
     );

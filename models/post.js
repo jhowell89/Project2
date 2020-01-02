@@ -15,6 +15,16 @@ module.exports = function(sequelize, DataTypes) {
       category: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      comment: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+        defaultValue: "",
+      },
+      rating: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        
       }
   });
 

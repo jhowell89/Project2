@@ -1,3 +1,17 @@
 .list-group-item {
   line-height: 2.5;
 }
+body {
+  background-image: url("restaurant-alcohol-bar-drinks-3540.jpg")
+}
+p {
+  color: Gray
+}
+#members {
+  background-color: lightgrey;
+}
+label {
+  color: white;
+  font-weight: bold;
+
+}
