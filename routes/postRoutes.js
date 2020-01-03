@@ -44,8 +44,10 @@ module.exports = function(app) {
     });
   });
 
-  app.put("/api/posts", function(req, res) {
+  app.put("/api/posts/:id", function(req, res) {
     db.Post.update(req.body, {
+      comment:req.body.comment,
+      comment_author:req.body.comment_author,
       where: {
         id: req.body.id
       }

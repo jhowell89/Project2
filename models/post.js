@@ -21,6 +21,11 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: true,
         defaultValue: "",
       },
+      comment_author: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: "",
+      },
       rating: {
         type: DataTypes.INTEGER,
         allowNull: false,
