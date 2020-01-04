@@ -1,3 +1,5 @@
+
+
 .list-group-item {
   line-height: 2.5;
 }
@@ -5,41 +7,99 @@ body {
   background-image: url("restaurant-alcohol-bar-drinks-3540.jpg")
 }
 p {
-  color: Gray
+  color: rgb(233, 233, 7);
+  font-size: large;
 }
 #members {
-  background-color:rgb(136,136,136,0.7);
+  background-color: grey;
   padding: 10px;
   margin: 15px;
 }
 label {
   color: white;
   font-weight: bold;
-
 }
 #cms {
-  background-color:	rgb(136,136,136,0.7);
+  background-color: rgb(136,136,136,0.7);
   padding: 10px;
   margin: 15px;
 }
-.card-body {
-  border: 2px !important;
-  border-color: black !important;
-  border-width: 5px !important;
+.jumbotron {
+  animation-duration: 6s;
+  animation-fill-mode: both;
+  animation-name: zoomInDown;
+  background-color: #2F3233;
+  color: white;
+  margin-top: 50px;
+  padding: 5px;
+  padding-bottom: 15px;
+  text-align: center;
+  /* font-style: italic; */
+  font-size: 18px;
+  opacity: 1.0;
 }
-
-.blog {
-  width: 600px;
+@import url("https://fonts.googleapis.com/css?family=Sacramento&display=swap");
+h1 {
+  font-size: calc(12px + 12vh);
+  line-height: calc(11px + 11vh);
+/*   text-shadow: 0 0 5px #F562FF, 0 0 15px #F562FF, 0 0 25px #F562FF,
+    0 0 20px #F562FF, 0 0 30px #890092, 0 0 80px #890092, 0 0 80px #890092;
+  color: #FCCAFF; */
+  text-shadow: 0 0 5px rgb(216, 28, 28);
+    color: rgb(170, 19, 19);
+  font-family: "Bradley Hand", cursive;
+  text-align: center;
+  animation: blink 12s infinite;
+  -webkit-animation: blink 12s infinite;
+}
+.dynamic {
+  background-color: brown;
+  white-space: nowrap;
+  font-style: oblique;
+  
   
 }
-.navbar-brand {
-  font-size: 40px;
-  text-shadow: 2px 2px 5px red;
+@-webkit-keyframes blink {
+  20%,
+  24%,
+  55% {
+    color: #111;
+    text-shadow: none;
+  }
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+/*     color: #FCCAFF;
+    text-shadow: 0 0 5px #F562FF, 0 0 15px #F562FF, 0 0 25px #F562FF,
+      0 0 20px #F562FF, 0 0 30px #890092, 0 0 80px #890092, 0 0 80px #890092; */
+  text-shadow: 0 0 5px #FFA500, 0 0 15px #FFA500, 0 0 20px #FFA500, 0 0 40px #FFA500, 0 0 60px #FF0000, 0 0 10px #FF8D00, 0 0 98px #FF0000;
+    color: #FFF6A9;
+  }
 }
-h2{
-  font-size: 40px;
-  font-style: italic;
-}
-small {
-  font-size: 20px;
+@keyframes blink {
+  20%,
+  24%,
+  55% {
+    color: rgba(204, 0, 0, 0.904);
+    text-shadow: none;
+  }
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+/*     color: #FCCAFF;
+    text-shadow: 0 0 5px #F562FF, 0 0 15px #F562FF, 0 0 25px #F562FF,
+      0 0 20px #F562FF, 0 0 30px #890092, 0 0 80px #890092, 0 0 80px #890092; */
+  text-shadow: 0 0 5px #775412, 0 0 15px white, 0 0 20px white, 0 0 40px #FFA500, 0 0 60px #FF0000, 0 0 10px #FF8D00, 0 0 98px white;
+    color: rgb(76, 76, 129);
+  }
 }

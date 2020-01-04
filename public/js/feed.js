@@ -2,7 +2,6 @@ $(document).ready(function() {
   // eslint-disable-next-line indent
   /* global moment */
 
-  // blogContainer holds all of our posts
   var feedContainer = $(".feed-container");
   var postCategorySelect = $("#category");
   var authorSelect = $("#author");
@@ -11,7 +10,8 @@ $(document).ready(function() {
   var id;
   var listOption;
   var comment = $("#message-text");
-  // Click events for the edit and delete buttons
+  var newComment;
+
   $(document).on("click", "button.delete", handlePostDelete);
   $(document).on("click", "#commentSubmit", handleComment);
   $(document).on("click", "button.edit", thisTest);
@@ -39,6 +39,7 @@ $(document).ready(function() {
     if (memberId) {
       memberId = "/?member_id=" + memberId;
     }
+    console.log(memberId)
     $.get("/api/posts" + memberId, function(data) {
       console.log("Posts", data);
       posts = data;
@@ -60,13 +61,18 @@ $(document).ready(function() {
     });
   }
 
+  // function updateComment(newComment) {
+  //   $.ajax({
+  //     method: "PUT",
+  //     url: "/api/comment/" + newComment.id,
+  //     data: newComment,
+  //   }).then(function(){
+  //     getPosts(postCategorySelect.val());
+  //   })
+  // }
   function updateComment(newComment) {
-    $.ajax({
-      method: "PUT",
-      url: "/api/posts/" + newComment.id,
-      data: newComment,
-    }).then(function(){
-      getPosts(postCategorySelect.val());
+    $.post("/api/comment", newComment, function () {
+        console.log(newComment);
     })
   }
 
@@ -88,9 +94,9 @@ $(document).ready(function() {
     newPostCard.addClass("card");
     var newPostCardHeading = $("<div>");
     newPostCardHeading.addClass("card-header");
-    var deleteBtn = $("<button>");
-    deleteBtn.text("x");
-    deleteBtn.addClass("delete btn btn-danger");
+    // var deleteBtn = $("<button>");
+    // deleteBtn.text("x");
+    // deleteBtn.addClass("delete btn btn-danger");
     var editBtn = $("<button>");
     editBtn.text("Leave a Comment");
     editBtn.addClass("edit btn btn-info");
@@ -124,7 +130,7 @@ $(document).ready(function() {
     newPostRating.text("Rating: " + post.rating + "/5");
     newPostDate.text(formattedDate);
     newPostTitle.append(newPostDate);
-    newPostCardHeading.append(deleteBtn);
+    // newPostCardHeading.append(deleteBtn);
     // newPostCardHeading.append(editBtn);
     newPostCardHeading.append(newPostTitle);
     newPostCardHeading.append(newPostAuthor);
@@ -157,7 +163,7 @@ $(document).ready(function() {
   // // to create an author first
   function renderAuthorList(data) {
     // if (!data.length) {
-    //   window.location.href = "/members";
+    //   window.location.href = "/";
     // }
     $(".hidden").removeClass("hidden");
     var rowsToAdd = [];
@@ -178,7 +184,6 @@ $(document).ready(function() {
     listOption.text(Member.name);
     return listOption;
   }
-  // This function figures out which post we want to delete and then calls deletePost
   function handlePostDelete() {
     var currentPost = $(this)
       .parent()
@@ -189,10 +194,10 @@ $(document).ready(function() {
   }
 
   function handleComment() {
-    var newComment = {
+      var newComment = {
       comment: comment.val().trim(),
       comment_author: authorSelect.val(),
-      id: currentPost
+      PostId: currentPost
     }
     console.log(newComment);
     updateComment(newComment);
@@ -219,17 +224,18 @@ $(document).ready(function() {
     if (id) {
       partial = " for Member #" + id;
     }
-    blogContainer.empty();
+    feedContainer.empty();
     var messageH2 = $("<h2>");
-    messageH2.css({ "text-align": "center", "margin-top": "50px" });
+    messageH2.css({ "text-align": "center", "margin-top": "50px", "color": "white" });
     messageH2.html(
       "No posts yet" +
         partial +
         ", navigate <a href='/post" +
         query +
-        "'>here</a> in order to get started."
+        "'>here</a> to write a post!."
     );
-    blogContainer.append(messageH2);
+    feedContainer.append(messageH2);
+    console.log(messageH2)
   }
 });
 

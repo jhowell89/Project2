@@ -25,6 +25,8 @@ app.set("view engine", "handlebars");
 require("./routes/memberRoutes")(app);
 require("./routes/htmlRoutes")(app);
 require("./routes/postRoutes")(app);
+require("./routes/commentRoutes")(app);
+
 
 
 var syncOptions = { force: false };

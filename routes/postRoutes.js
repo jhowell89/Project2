@@ -10,7 +10,7 @@ module.exports = function(app) {
     }
     db.Post.findAll({
       where: query,
-      include: [db.Member]
+      include: [db.Member, db.Comment]
     }).then(function(dbPost) {
       res.json(dbPost);
     });

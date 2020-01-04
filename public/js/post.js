@@ -33,9 +33,9 @@ $(document).ready(function() {
     function handleFormSubmit(event) {
       event.preventDefault();
       // Wont submit the post if we are missing a body, title, or author
-      // if (!titleInput.val().trim() || !bodyInput.val().trim() || !authorSelect.val()) {
-      //   return;
-      // }
+      if (!titleInput.val().trim() || !bodyInput.val().trim() || !authorSelect.val()) {
+        return;
+      }
       // Constructing a newPost object to hand to the database
       var newPost = {
         title: titleInput
@@ -61,7 +61,6 @@ $(document).ready(function() {
       // }
     }
   
-    // Submits a new post and brings user to blog page upon completion
     function submitPost(post) {
       $.post("/api/posts", post, function() {
         console.log(post);
@@ -96,16 +95,15 @@ $(document).ready(function() {
     //   });
     // }
   
-    // // A function to get Authors and then render our list of Authors
     function getAuthors() {
       $.get("/api/members", renderAuthorList);
     }
-    // // Function to either render a list of authors, or if there are none, direct the user to the page
-    // // to create an author first
+
     function renderAuthorList(data) {
-      // if (!data.length) {
-      //   window.location.href = "/members";
-      // }
+      if (!data.length) {
+        alert("Sign in to create a post!")
+        window.location.href = "/";
+      }
       $(".hidden").removeClass("hidden");
       var rowsToAdd = [];
       for (var i = 0; i < data.length; i++) {
