@@ -32,13 +32,6 @@ module.exports = function(sequelize, DataTypes) {
         
       }
   });
-
-  // Post.associate = function(models) {
-  //   Post.hasMany(models.Comment, {
-  //     onDelete: "cascade"
-  //   });
-  // };
-
   Post.associate = function(models) {
     Post.belongsTo(models.Member, {
       foreignKey: {
