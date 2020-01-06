@@ -89,9 +89,9 @@ $(document).ready(function() {
   // This function constructs a post's HTML
   function createNewRow(post) {
     var formattedDate = new Date(post.createdAt);
-    formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
+    formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm a");
     var newPostCard = $("<div>");
-    newPostCard.addClass("card scroll");
+    newPostCard.addClass("card feed-card");
     var newPostCardHeading = $("<div>");
     newPostCardHeading.addClass("card-header");
     // var deleteBtn = $("<button>");
@@ -99,111 +99,141 @@ $(document).ready(function() {
     // deleteBtn.addClass("delete btn btn-danger");
     var editBtn = $("<button>");
     editBtn.text("Leave a Comment");
-    editBtn.addClass("edit btn btn-primary col-md-6 offset-md-3 btn-light");
+    editBtn.addClass("edit btn btn-primary col-md-6 offset-md-3 btn-secondary");
     editBtn.attr("data-toggle","modal");
     editBtn.attr("data-target","#commentModal");
     var newPostTitle = $("<h2>");
-    var newPostDate = $("<small>");
+    var newPostDate = $("<h6>");
     var newPostAuthor = $("<h5>");
-    // var commentAuthor = $("<h7>")
-    // commentAuthor.text(post.Comments.comment_author)
+    var newPostImage = $("<img>")
+    newPostImage.css({
+      float: "right",
+      height: "200px",
+      width: "160px"
+    });
+    if (post.category === "IPA") {
+      newPostImage.attr("src", "/styles/IPA.jpg")
+    }
+    if (post.category === "Lager") {
+      newPostImage.attr("src", "/styles/Lager.jpg")
+    }
+    if (post.category === "Sour") {
+      newPostImage.attr("src", "/styles/Sour.jpg")
+    }
+    if (post.category === "Port") {
+      newPostImage.attr("src", "/styles/Porter.jpg")
+    }
+    if (post.category === "Blonde") {
+      newPostImage.attr("src", "/styles/Blonde.jpg")
+    }
+    if (post.category === "Stout") {
+      newPostImage.attr("src", "/styles/Stout.jpg")
+    }
+    if (post.category === "Witbier") {
+      newPostImage.attr("src", "/styles/Lambic.jpg")
+    }
+    if (post.category === "Lambic") {
+      newPostImage.attr("src", "/styles/Lambic.jpg")
+    }
+    if (post.category === "Pilsner") {
+      newPostImage.attr("src", "/styles/Pilsner.jpg")
+    }
+    if (post.category === "Other (Specify in your review!)") {
+      newPostImage.attr("src", "/styles/IPA.jpg")
+    }
+
     newPostAuthor.text("Written by: " + post.Member.name);
     var newPostCardBody = $("<div>");
-    newPostCardBody.addClass("card-body");
+    newPostCardBody.addClass("card-body border border-secondary border-top-0");
     var newPostBody = $("<p>");
     var newPostCategory = $("<h5>");
     var newPostRating = $("<h5>")
     var newPostCardComments = $("<div>");
+    newPostCardComments.addClass("card scroll");
     var newPostCommentHeading = $("<h5>");
     newPostCommentHeading.addClass("comment-header")
     var newPostComments = $("<div>");
     newPostComments.addClass("card-body");
     var newPostCommentsBody = $("<p>");
+    newPostCommentsBody.addClass("comments")
     var newPostFooter = $("<div>");
     newPostFooter.append(editBtn)
     newPostTitle.text(post.title + " ");
     newPostBody.text(post.body);
     newPostCategory.text("Category: " + post.category);
+    if (post.rating === 5){
+      newPostRating.css({color: "green"})
+    }
+    if (post.rating === 4){
+      newPostRating.css({color: "green"})
+    }
+    if (post.rating === 3){
+      newPostRating.css({color: " orange"})
+    }
+    if (post.rating === 2){
+      newPostRating.css({color: "orange"})
+    }
+    if (post.rating === 1){
+      newPostRating.css({color: "red"})
+    }
     newPostRating.text("Rating: " + post.rating + "/5");
+
     newPostDate.text(formattedDate);
-    newPostTitle.append(newPostDate);
-    // newPostCardHeading.append(deleteBtn);
-    // newPostCardHeading.append(editBtn);
+    newPostCardHeading.append(newPostImage);
     newPostCardHeading.append(newPostTitle);
     newPostCardHeading.append(newPostAuthor);
     newPostCardHeading.append(newPostCategory);
     newPostCardHeading.append(newPostRating);
+    newPostCardHeading.append(newPostDate);
     newPostCardBody.append(newPostBody);
     newPostCommentHeading.text("Comments ");
-    newPostCommentsBody.text(post.Comments.comment);
-    newPostComments.append(newPostCommentHeading);
-    newPostComments.append(commentAuthor);
-    newPostComments.append(newPostCommentsBody);
-    newPostComments.append(newPostCommentsFooter);
     newPostCard.append(newPostCardHeading);
     newPostCard.append(newPostCardBody);
-    newPostCard.append(newPostComments);
+    newPostCard.append(newPostCardComments);
     newPostCard.data("post", post);
-    var commentsToAdd = [];
-    // comments = post.Comments[0].comment;
+
+    if (post.Comments.length === 0) {
+      var noComments = $("<h5>")
+      noComments.text("No comments yet!")
+      newPostCardComments.append(noComments)
+  
+    }
+else {
     for (var j = 0; j < post.Comments.length; j++){
       console.log(post.Comments[j])
         var commentAuthor = $("<h5>")
+        commentAuthor.addClass("comment-author")
+        var formattedDate = new Date(post.Comments[j].createdAt);
+        formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm a");
+        var commentDate = $("<h6>");
+        commentDate.addClass("comment-date")
+        commentDate.text(formattedDate);
         commentAuthor.text(post.Comments[j].comment_author + " commented:")
         commentAuthor.css({
           font: "15px",
-          color: "Dark Grey"
-        })
-        // var newPostCommentHeading = $("<h5>");
+          color: "light Grey",
+        });
         var newPostComments = $("<div>");
-        newPostComments.addClass("card text-white bg-secondary mb-3")
+        newPostComments.addClass("card text-white bg-secondary mb-3");
         newPostComments.addClass("card-body");
         var newPostCommentsBody = $("<p>");
+        newPostCommentsBody.addClass("comment-body")
         var newPostCommentsFooter = $("<div>");
-        // newPostCommentHeading.text("Comment: ");
+        var newPostCommentsHeading = $("<div>");
+        newPostCommentsHeading.addClass("border border-top-0 border-right-0 border-left-0 border-dark comment-heading")
+        newPostCommentsHeading.css({padding: "5px"});
         newPostCommentsBody.text(post.Comments[j].comment);
-        // newPostCommentsFooter.append(editBtn);
-        // newPostComments.append(newPostCommentHeading);
-        newPostComments.append(commentAuthor);
+        newPostCommentsHeading.append(commentAuthor);
+        newPostCommentsHeading.append(commentDate);
+        newPostComments.append(newPostCommentsHeading);
         newPostComments.append(newPostCommentsBody);
         newPostComments.append(newPostCommentsFooter);
-        newPostCard.append(newPostComments)
+        newPostCardComments.append(newPostComments)
     }
+  }
     newPostCard.append(newPostFooter);
-
-    
-    // console.log(comments);
-    // for (var i = 0; i < comments.length; i++) {
-    //   commentsToAdd.push(createCommentRows(comment[i]));
-    // }
-    // newPostBody.append(commentsToAdd);
   
     return newPostCard;
-  }
-
-  function createCommentRows (post) {
-    var commentAuthor = $("<h7>")
-    // commentAuthor.text(post.Member.name + " commented:")
-    var newPostCommentHeading = $("<h5>");
-    var newPostComments = $("<div>");
-    newPostComments.addClass("card-body");
-    var newPostCommentsBody = $("<p>");
-    var newPostCommentsFooter = $("<div>");
-    newPostCommentHeading.text("Comment: ");
-    // newPostCommentsBody.text(newComment.comment);
-    // newPostCommentsFooter.append(editBtn);
-    newPostComments.append(newPostCommentHeading);
-    newPostComments.append(commentAuthor);
-    newPostComments.append(newPostCommentsBody);
-    newPostComments.append(newPostCommentsFooter);
-    return newPostComments
-  }
-  function initializeComments() {
-    var commentsToAdd = [];
-    for (var i = 0; i < newComment.length; i++) {
-      postsToAdd.push(createCommentRows(comment[i]));
-    }
-    newPostBody.append(commentsToAdd);
   }
   
  

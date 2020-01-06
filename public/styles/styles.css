@@ -7,11 +7,13 @@ body {
   background-image: url("restaurant-alcohol-bar-drinks-3540.jpg")
 }
 #sign-in {
-  color: rgb(233, 233, 7);
+  color: white;
+  background-color:rgb(136,136,136,0.7);
   font-size: large;
+
 }
 #members {
-  background-color: grey;
+  background-color:rgb(136,136,136,0.7);
   padding: 10px;
   margin: 15px;
 }
@@ -27,24 +29,52 @@ label {
 .comment-card {
   border: solid, black;
   border-style: solid;
-  border-color: gray;
+  border-color: darkblue;
+}
+.card-body {
+  padding: 10px;
+  border: solid, lightgray
+}
+.feed-card{
+  height: auto;
+}
+.feed-containter{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.comment-body {
+  padding-top: 5px;
+  font-size: medium;
+}
+.comment-date {
+  font-size: small;
+}
+.comment-author {
+  font-size:small;
+}
+.bg-secondary {
+  background-color: rgb(136,136,136,0.7) !important;
 }
 
-h5 {
- /* font-weight: bold;
- text-align: center;
- text-decoration: underline; */
+p {
+  color: black;
+  font-size: large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  
 }
 .card{
   padding: 10px;
   margin-bottom: 10px;
+  /* flex-grow: 2; */
 }
 .comment-header {
   padding:10px !important;
   text-align: center;
 }
 .scroll {
-  max-height: 500px;
+  max-height: 250px;
   overflow-y: auto;
 }
 .jumbotron {
