@@ -1,26 +1,18 @@
-$(document).ready(function() {
-  // eslint-disable-next-line indent
-  /* global moment */
+$(document).ready(function () {
 
   var feedContainer = $(".feed-container");
   var postCategorySelect = $("#category");
   var authorSelect = $("#author");
-  var MemberId; 
+  var MemberId;
   var currentPost;
-  var id;
+  var posts;
   var listOption;
   var comment = $("#message-text");
-  var newComment;
 
   $(document).on("click", "button.delete", handlePostDelete);
   $(document).on("click", "#commentSubmit", handleComment);
   $(document).on("click", "button.edit", thisTest);
 
-  // Variable to hold our posts
-  var posts;
-
-  // The code below handles the case where we want to get blog posts for a specific author
-  // Looks for a query param in the url for author_id
   var url = window.location.search;
   var memberId;
   if (url.indexOf("?member_id=") !== -1) {
@@ -28,19 +20,17 @@ $(document).ready(function() {
     console.log(memberId)
     getPosts(memberId);
   }
-  // If there's no authorId we just get all posts as usual
   else {
     getPosts();
   }
 
-  // This function grabs posts from the database and updates the view
   function getPosts(member) {
     memberId = member || "";
     if (memberId) {
       memberId = "/?member_id=" + memberId;
     }
     console.log(memberId)
-    $.get("/api/posts" + memberId, function(data) {
+    $.get("/api/posts" + memberId, function (data) {
       console.log("Posts", data);
       posts = data;
       if (!posts || !posts.length) {
@@ -51,32 +41,21 @@ $(document).ready(function() {
     });
   }
 
-  // This function does an API call to delete posts
   function deletePost(id) {
     $.ajax({
       method: "DELETE",
       url: "/api/posts/" + id
-    }).then(function() {
+    }).then(function () {
       getPosts(postCategorySelect.val());
     });
   }
 
-  // function updateComment(newComment) {
-  //   $.ajax({
-  //     method: "PUT",
-  //     url: "/api/comment/" + newComment.id,
-  //     data: newComment,
-  //   }).then(function(){
-  //     getPosts(postCategorySelect.val());
-  //   })
-  // }
   function updateComment(newComment) {
     $.post("/api/comment", newComment, function () {
-        console.log(newComment);
+      console.log(newComment);
     })
   }
 
-  // InitializeRows handles appending all of our constructed post HTML inside blogContainer
   function initializeRows() {
     feedContainer.empty();
     var postsToAdd = [];
@@ -86,7 +65,6 @@ $(document).ready(function() {
     feedContainer.append(postsToAdd);
   }
 
-  // This function constructs a post's HTML
   function createNewRow(post) {
     var formattedDate = new Date(post.createdAt);
     formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm a");
@@ -94,14 +72,11 @@ $(document).ready(function() {
     newPostCard.addClass("card feed-card");
     var newPostCardHeading = $("<div>");
     newPostCardHeading.addClass("card-header");
-    // var deleteBtn = $("<button>");
-    // deleteBtn.text("x");
-    // deleteBtn.addClass("delete btn btn-danger");
     var editBtn = $("<button>");
     editBtn.text("Leave a Comment");
     editBtn.addClass("edit btn btn-primary col-md-6 offset-md-3 btn-secondary");
-    editBtn.attr("data-toggle","modal");
-    editBtn.attr("data-target","#commentModal");
+    editBtn.attr("data-toggle", "modal");
+    editBtn.attr("data-target", "#commentModal");
     var newPostTitle = $("<h2>");
     var newPostDate = $("<h6>");
     var newPostAuthor = $("<h5>");
@@ -161,20 +136,20 @@ $(document).ready(function() {
     newPostTitle.text(post.title + " ");
     newPostBody.text(post.body);
     newPostCategory.text("Category: " + post.category);
-    if (post.rating === 5){
-      newPostRating.css({color: "green"})
+    if (post.rating === 5) {
+      newPostRating.css({ color: "green" })
     }
-    if (post.rating === 4){
-      newPostRating.css({color: "green"})
+    if (post.rating === 4) {
+      newPostRating.css({ color: "green" })
     }
-    if (post.rating === 3){
-      newPostRating.css({color: " orange"})
+    if (post.rating === 3) {
+      newPostRating.css({ color: " orange" })
     }
-    if (post.rating === 2){
-      newPostRating.css({color: "orange"})
+    if (post.rating === 2) {
+      newPostRating.css({ color: "orange" })
     }
-    if (post.rating === 1){
-      newPostRating.css({color: "red"})
+    if (post.rating === 1) {
+      newPostRating.css({ color: "red" })
     }
     newPostRating.text("Rating: " + post.rating + "/5");
 
@@ -196,11 +171,11 @@ $(document).ready(function() {
       var noComments = $("<h5>")
       noComments.text("No comments yet!")
       newPostCardComments.append(noComments)
-  
+
     }
-else {
-    for (var j = 0; j < post.Comments.length; j++){
-      console.log(post.Comments[j])
+    else {
+      for (var j = 0; j < post.Comments.length; j++) {
+        console.log(post.Comments[j])
         var commentAuthor = $("<h5>")
         commentAuthor.addClass("comment-author")
         var formattedDate = new Date(post.Comments[j].createdAt);
@@ -221,7 +196,7 @@ else {
         var newPostCommentsFooter = $("<div>");
         var newPostCommentsHeading = $("<div>");
         newPostCommentsHeading.addClass("border border-top-0 border-right-0 border-left-0 border-dark comment-heading")
-        newPostCommentsHeading.css({padding: "5px"});
+        newPostCommentsHeading.css({ padding: "5px" });
         newPostCommentsBody.text(post.Comments[j].comment);
         newPostCommentsHeading.append(commentAuthor);
         newPostCommentsHeading.append(commentDate);
@@ -229,23 +204,20 @@ else {
         newPostComments.append(newPostCommentsBody);
         newPostComments.append(newPostCommentsFooter);
         newPostCardComments.append(newPostComments)
+      }
     }
-  }
     newPostCard.append(newPostFooter);
-  
+
     return newPostCard;
   }
-  
- 
+
+
   getAuthors();
-   function getAuthors() {
+  function getAuthors() {
     $.get("/api/members", renderAuthorList);
   }
 
   function renderAuthorList(data) {
-    // if (!data.length) {
-    //   window.location.href = "/";
-    // }
     $(".hidden").removeClass("hidden");
     var rowsToAdd = [];
     for (var i = 0; i < data.length; i++) {
@@ -258,7 +230,6 @@ else {
     authorSelect.val(MemberId);
   }
 
-  // Creates the author options in the dropdown
   function createAuthorRow(Member) {
     listOption = $("<option>");
     listOption.attr("value", Member.name);
@@ -270,12 +241,12 @@ else {
       .parent()
       .parent()
       .data("post");
-      console.log(currentPost);
+    console.log(currentPost);
     deletePost(currentPost.id);
   }
 
   function handleComment() {
-      var newComment = {
+    var newComment = {
       comment: comment.val().trim(),
       comment_author: authorSelect.val(),
       PostId: currentPost
@@ -287,11 +258,11 @@ else {
     location.reload();
   }
 
-  function thisTest(){
+  function thisTest() {
     currentPost = $(this)
-    .parent()
-    .parent()
-    .data("post");
+      .parent()
+      .parent()
+      .data("post");
     currentPost = currentPost.id;
     console.log(currentPost)
   }
@@ -308,10 +279,10 @@ else {
     messageH2.css({ "text-align": "center", "margin-top": "50px", "color": "white" });
     messageH2.html(
       "No posts yet" +
-        partial +
-        ", navigate <a href='/post" +
-        query +
-        "'>here</a> to write a post!."
+      partial +
+      ", navigate <a href='/post" +
+      query +
+      "'>here</a> to write a post!."
     );
     feedContainer.append(messageH2);
     console.log(messageH2)

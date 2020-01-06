@@ -4,13 +4,14 @@
   line-height: 2.5;
 }
 body {
-  background-image: url("restaurant-alcohol-bar-drinks-3540.jpg")
+  background-image: url("/styles/image.jpg");
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 #sign-in {
   color: white;
   background-color:rgb(136,136,136,0.7);
   font-size: large;
-
+  margin-bottom: 5px;
 }
 #members {
   background-color:rgb(136,136,136,0.7);
@@ -21,7 +22,7 @@ label {
   color: white;
   font-weight: bold;
 }
-#cms {
+#beerform {
   background-color: rgb(136,136,136,0.7);
   padding: 10px;
   margin: 15px;
@@ -61,7 +62,9 @@ label {
 p {
   color: black;
   font-size: large;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+footer {
+  height: 50px;
   
 }
 .card{

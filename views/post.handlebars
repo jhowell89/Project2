@@ -16,10 +16,10 @@
     <div class="container hidden">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <form id="cms">
+            <form id="beerform" class="bg-secondary">
                 <div class="form-group">
                     <label for="title">Beer!</label>
-                    <input placeholder="Beer You're Reviewing!" type="text" class="form-control" id="title">
+                    <input placeholder="Ex. Coors Light" type="text" class="form-control" id="title">
                     <br />
                     <div class="form-group">
                         <label for="category">Type of Beer</label>
@@ -39,16 +39,16 @@
                      
                     </div>
                     <label for="body">Review:</label>
-                    <textarea placeholder="Post Body" class="form-control" rows="10" id="body"></textarea>
+                    <textarea placeholder="Write your review here" class="form-control" rows="10" id="body"></textarea>
                     <br>
                          <div class="form-group">
                         <label for="category">Overall Rating:</label>
                         <select class="form-control" id="rating">
-                            <option>5</option>
-                            <option>4</option>
-                            <option>3</option>
-                            <option>2</option>
-                            <option>1</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
                         </select>
                         <br>
                     <div class="form-group">
