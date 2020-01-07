@@ -53,7 +53,9 @@ $(document).ready(function () {
   function updateComment(newComment) {
     $.post("/api/comment", newComment, function () {
       console.log(newComment);
-    })
+    }).then(function () {
+      getPosts(postCategorySelect.val());
+    });
   }
 
   function initializeRows() {
@@ -252,10 +254,9 @@ $(document).ready(function () {
       PostId: currentPost
     }
     console.log(newComment);
-    updateComment(newComment);
+    updateComment(newComment)
     $(".edit").modal('hide');
-    console.log(currentPost);
-    location.reload();
+  
   }
 
   function thisTest() {
