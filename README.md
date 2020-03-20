@@ -2,11 +2,15 @@
 
 **Overview**
 
-* "I'm just here for the Beer" is a social media app that allows users to input what kind of beer they're drinking, comment on it, and rate it in hopes  that others will see it and get an idea of beers they might enjoy.
+* "I'm just here for the Beer" is a Blogging app using handlebars that allows users to input what kind of beer they're drinking, comment on it, and rate it in hopes  that others will see it and get an idea of beers they might enjoy.
 
 **URL**
 
 * https://unccodingcampproject2.herokuapp.com/
+
+**Technologies used**
+Node
+SQL
 
 **Demo**
 
