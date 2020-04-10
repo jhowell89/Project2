@@ -9,7 +9,7 @@
 * https://unccodingcampproject2.herokuapp.com/
 
 **Technologies used**
-Node
+Node, 
 SQL
 
 **Demo**
